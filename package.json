@@ -1,0 +1,41 @@
+{
+  "name": "nooxtabs",
+  "productName": "NooXTabs",
+  "version": "0.2.0",
+  "description": "Windows 10 için sekmeli Dosya Gezgini (gerçek Explorer pencerelerini sekme olarak toplar)",
+  "author": "NooXRii",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "koffi": "^2.9.0"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.noox.tabs",
+    "productName": "NooXTabs",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "preload.js", "src/**/*", "renderer/**/*", "assets/**/*", "package.json"],
+    "asarUnpack": ["**/node_modules/koffi/build/**"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NooXTabs",
+      "include": "build/installer.nsh",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
